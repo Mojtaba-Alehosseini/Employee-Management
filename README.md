@@ -1,6 +1,6 @@
 # employee-management
 + employee management system with c++
-+ have comments in Enflish and Finglish :)
++ have comments in English and Finglish :)
 + 
 + Object oriented programming with c++
 + Personal information of employees of company include name , last name, marital status, height, birthday, year of employment, rank, salary.
