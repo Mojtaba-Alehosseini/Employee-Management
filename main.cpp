@@ -1,3 +1,6 @@
+// Mojtaba :)
+// simple prject :)
+
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
@@ -12,25 +15,30 @@ public:
 	int Day, Month, Year;
 };
 
-// kelase karmand haa ke dar sorate soal gofte shode
+// kelase karmand haa
 class employee
 {
 public:
     char Name[31], LastName[41];
     Date DOB;
     Date estekhdam;
+	//estekhdam= employment
 	int tahol;
 	// tahol=1 yani moteahel , tahol=0 yani mojarad
+	// tahol= marital status, tahol=1 mean married, tahol=0 mean single
 	// hengam vorud bayad 0 o yek vared beshe, mishod bejaye int bool gereft, farghi nadare int rahat tare
 	int ghad;
+	// ghad = height in cm
 	// be cm bashe masalan 182
 	int rotbe;
 	// beyne 1 ta 5 khode soorat soal gofte
 	double hoghoogh;
-	// masalan 215.320 , chon zarib sabet double hast majboor shodim ino ham double beirim , farghi nadare
+	// hoghoogh = salary
+	// masalan 215.320 , chon zarib sabet double hast majboor shodim ino ham double beirim , kheili farghi nadare
 	employee()
 	{
 	    // tabe sazande
+	    // Constructor function
 		strcpy(Name, "");
 		strcpy(LastName, "");
 		DOB.Day = DOB.Month = DOB.Year = 0;
@@ -38,10 +46,12 @@ public:
 		tahol=0;
 		ghad=0;
 		rotbe=1;
+		// rotbe = rank
 		hoghoogh=0;
 	}
 
     // baraye khundan az tabe estefade kardim, baraye chapesh az sarbargozari
+    // i use function for getting data and use Operator overloading for print
 
 	void employee_Open(void)
 	{
@@ -66,9 +76,11 @@ public:
 		cout << "vaziate ta'ahol: (moteahel=1 , mojarad=0)\t";
 		cin >> tahol;
 		// mishod ye halghe gozasht ke check kone taraf faghat 0 o 1 vared karde, vali niazi nist
+		// i can use a loop to check it that input is 0 or 1
 		cout << "ghad:\t";
 		cin >> ghad;
 		cout << "rotbe: az 1 ta 5 vared shavad\t";
+		// rank fromm 1 to 5
 		cin >> rotbe;
 		cout << "hoghoogh:\t";
 		cin >> hoghoogh;
@@ -80,6 +92,7 @@ public:
 
 // ghesmate 3 soal
 // baraye zarib sabet ye kelas tarif krdm
+// zaribsabet= Fixed coefficient
 class zaribsabet
 {
 public:
@@ -95,11 +108,11 @@ public:
 // meghdar dehi be zarib sabet va neveshtanesh dar file baraye badan
 void zaribwrite(double a)
 {
-    // ye double a barash mifrestim va un ro jaygozine zaribe ghadim mikone
+    // ye double 'a' barash mifrestim va un ro jaygozine zaribe ghadim mikone
     zaribsabet z;
     z.ZS=a;
     ofstream myfile;
-    myfile.open ("zarib.txt" , ios::out|ios::binary );  // haminjuri gozashtm binary
+    myfile.open ("zarib.txt" , ios::out|ios::binary );  // haminjuri gozashtm binary, no reason for binary :)
     myfile.write((char *)&z, sizeof(zaribsabet));
     myfile.close();
 }
@@ -119,26 +132,28 @@ double printzarib()
 }
 
 // chape karmand, mituni har tor khodet bekhay benevisish
+// employee print, u can customize it
 ostream & operator<<(ostream &X, const employee &A)
 {
     X<<"\n| Name: "<<A.Name;
     X<<"\tLast Name: "<<A.LastName;
     X<<"\ttarikhe tavalod: "<<A.DOB.Day<<" \ "<<A.DOB.Month<<" \ "<<A.DOB.Year<<"\t";
     X<<"\ttarikhe estekhdam: "<<A.estekhdam.Day<<" \ "<<A.estekhdam.Month<<" \ "<<A.estekhdam.Year<<"\t";
-    // batavajoh be inke ruz o mah mohem nist mituni az inja pakesh koni va faghat sal bashe
     X<<"\tghad: "<<A.ghad<<"\t";
     X<<"\trotbe: "<<A.rotbe<<"\t";
     X<<"\thoghoogh: "<<A.hoghoogh<<"\t";
     if (A.tahol==0)
         X<<"\tta'ahol: Mojarad";
+	// mojarad= single
     else
         X<<"\tta'ahol: Moteahel";
+	moteahel= married
     return X;
-    // mituni bejay \t , \n bezani ke harchizio khate badesh chap kone, mituni tozahitesh ro bardari, va hezarta kare dg
 }
 
 
-// andaze file ro behemun mide, tabe mohem va porkarbordie
+// andaze file ro behemun mide
+// file size function
 long int file_size(char filename[51])
 {
     ifstream X;
@@ -152,38 +167,44 @@ long int file_size(char filename[51])
 }
 
 // ghesmate 6 e soal
+// a function for calculate somethings about Retirement
 void sanavat (employee A)
 {
     int TT,TE;
-    // TT=Tarikh Tavaold , TE=Tarikh Estekhdam
+    // TT=Tarikh Tavaold= Date of Birth , TE=Tarikh Estekhdam= Date of employment
     TT=A.DOB.Year;
     TE=A.estekhdam.Year;
-    cout<<"\n tedad sale khedmat: "<<1399-TE; //faghat sal haro az ham kam mikonim, agar bekhaym daghigh hesab konim toolani mishe
-    int sen=1399-TT;    // senne karmand
-    int tashast=60-sen;     // chand sale dg taa 60 salegish munde 60 menhaye senne taraf, vazehe
-    int khedmat=1399-TE;       // chand sal ta alan khedmat karde yani 1399 menhaye tarikhe estekhdam
-    int tasi=30-khedmat;      // chand sal dg munde ta 30 sal khedmatesh por beshe yani 30 menhaye tedad salhayi ke ta alan kar karde
+	// as the question want i use fixed year to calculate this data, fixed year is 1399
+    cout<<"\n tedad sale khedmat: "<<1399-TE; //faghat sal haro az ham kam mikonim, calculate haw many years of working
+    int sen=1399-TT;    // senne karmand, how old is the employee
+    int tashast=60-sen;     // chand sale dg taa 60 salegish munde 60 menhaye senne taraf, how many years is ramaining to 60 years old of the employee
+    int khedmat=1399-TE;       // chand sal ta alan khedmat karde yani 1399 menhaye tarikhe estekhdam, how many years the employee worked
+    int tasi=30-khedmat;      // chand sal dg munde ta 30 sal khedmatesh por beshe yani 30 menhaye tedad salhayi ke ta alan kar karde, how many years remaining to reach 30 years worked for the employee
 
     // 2 rah baraye bazneshastegi hast, ya 60 salesh beshe , ya 30 sal kar kone
+    // 2 ways for Retirement, reach 60 years old, work for 30 years
     if (tashast<tasi)
     {
         // agar tedad salhayi ke munde ta 60 salesh beshe kamtar az tedad salhayi hast ke ta 30 sal khedmat kone
         // yani masalan 55 saleshe va 20 sal khedmat karde, pas be raveshe bazneshastegi ba sen bazneshaste mishe : 5sal dg 60 salesh mishe, vali 10 sal dg 30salesh por mishe
         cout<<"\ntedad sale baghimande ta bazneshastegi dar 60 salegi= "<<tashast;
+	    // how many years is remaining for Retirement
     }
     else
         cout<<"\ntedad sale baghimande ba 30 sal khedmat= "<<tasi; // bar aks balayi, tedad salayi ke 30sal khedmat mishe kamtar az tedad salayi e k 60salesh beshe
+	// how many years is/are remaining for Retirement
 }
 
 int main()
 {
-    employee M;     // vazehe
-	ofstream A;     // baraye neveshtan
-	ifstream B;     // baraye khandan
-	double zarib;   // baraye zarib sabet badan estefade mishe, age goft chera static nagerefti begu injuri kar kard
-	int n;  // baraye tedad e karmanda gereftim ino
-	employee *ALL;  // tu soal ghesmate 2 gofte bud araye pooya
+    employee M;
+	ofstream A;     // baraye neveshtan, for writing in file
+	ifstream B;     // baraye khandan, for reading from file
+	double zarib;
+	int n;
+	employee *ALL;  // ghesmate 2 soal, dinamic array
 	n=(file_size("Personnel.txt"))/(sizeof(employee));      // hajme file ro ba tabe file size be dast miare va taghsim bar andaze kelase employee mikone, ba in kar tedade karmanda be dast miad
+	// n = calculate that how many employees we have
     ALL=new employee[n];        // sakhtan araye pooya
 
 	int Choice;
@@ -191,13 +212,12 @@ int main()
 		{
 			cout << "\n 1) add employee";
 			cout << "\n 2) print all employee";
-			cout << "\n 3) bime va maliat e karmand";
-			cout << "\n 4) khalese daryafti karmand";
-            cout << "\n 5) sanavat";
-            cout << "\n 6) zarib sabet";
+			cout << "\n 3) bime va maliat e karmand"; // insurance and taxes
+			cout << "\n 4) khalese daryafti karmand"; // net monthly income 
+            		cout << "\n 5) sanavat"; // about retirement
+            		cout << "\n 6) zarib sabet"; // fixed coefficient
 			cout << "\n 0) Exit";
 			cout << "\nEnter your choice:";
-			// mituni matn haye bala ro avaz koni
 			cin >> Choice;
 			switch (Choice)
 			{
@@ -206,8 +226,9 @@ int main()
                 M.employee_Open();      // ba estefade az tabe mikhune
                 A.open("Personnel.txt", ios::app | ios::binary);        //ios::app yani be akhare file ezafe kone
                 A.write((char *)&M, sizeof(M));     // neveshtn dar file
-                A.close();  // haman bayad baste beshe
+                A.close();  // hatman bayad baste beshe
                 // bad az har karmandi ke neveshte mishe bayad araye poyayi ke sakhti ro meghdaresho update koni
+		// we should update the array after every employee add
                 n=(file_size("Personnel.txt"))/(sizeof(employee));
                 ALL=new employee[n];    // akhare barname delet esh kardm
                 break;
@@ -220,7 +241,7 @@ int main()
                 }
                 else
                 {
-                    int i=0;    // chon gharare berize tu araye pooya
+                    int i=0;
                     B.read((char *)&M, sizeof(employee));
                     while(B.eof() != true)
                     {
@@ -242,16 +263,15 @@ int main()
                 else
                 {
                     int i;
-                    cout<<"karmande chandom? yek adad beyne 0 ta "<<n<<" vared konid";      // chon nagofte search o ina nazashtim, aval print kone hamaro bad bebine kudum karmand ro mikhad, be trtib az sefr shuru mishan, chon rikhtimeshun tu araye ALL
+                    cout<<"karmande chandom? yek adad beyne 0 ta "<<n<<" vared konid";      //aval print kone hamaro bad bebine kudum karmand ro mikhad, be trtib az sefr shuru mishan, chon rikhtimeshun tu araye ALL
                     cin>>i;
                     double h,s;
                     // h= hoghoogh , z=zarib , s baraye javabe akhar
                     h=ALL[i].hoghoogh;
                     zarib=printzarib();     // meghdare zarib sabet ro ba tabe bedast miarim
-                    cout<<h<<"\t"<<zarib;       // in khato mituni pak koni
+                    cout<<h<<"\t"<<zarib;
                     s=h*zarib;      // hoghoogh zarbdar zaribsabet mishe mizane pooli ke babate maliat o bime mire
                     cout<<"\n mizane maliat va bime baraye karmande "<<i<<" om= "<<s;
-                    // injaha har tor khodet doost dari bayad cout haro benevisi
                 }
                 break;
 			case 4:
@@ -313,4 +333,4 @@ int main()
     delete ALL; // bara mohkam kari
 	return 0;
 }
-// akhare har case bayad break bashe , age nabashe ye case ro ke anjam mide mire case badi ro ham anjam bede , break nmizare az mahdoode khodesh jolotar bere
+// Mojtabaaa96
